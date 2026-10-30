@@ -1,0 +1,145 @@
+./scripts/deploy.sh v1.0.0
+==> Deploying v1.0.0 into slot 'blue' (active slot: green)
+ Image apex-ops-api:v1.0.0 Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 597B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.11kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim-bookworm
+#3 DONE 1.9s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 122B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 358B done
+#5 DONE 0.0s
+
+#6 [build 1/5] FROM docker.io/library/python:3.12-slim-bookworm@sha256:e697c81897302a4c4333bade000d98038fbb21eb064f8ee1fd42d02ebcd9d337
+#6 resolve docker.io/library/python:3.12-slim-bookworm@sha256:e697c81897302a4c4333bade000d98038fbb21eb064f8ee1fd42d02ebcd9d337 0.0s done
+#6 CACHED
+
+#7 [build 2/5] WORKDIR /build
+#7 CACHED
+
+#8 [build 3/5] RUN python -m venv /opt/venv
+#8 CACHED
+
+#9 [build 4/5] COPY requirements.txt .
+#9 CACHED
+
+#10 [build 5/5] RUN pip install -r requirements.txt
+#10 CACHED
+
+#11 [stage-1 2/6] RUN apt-get update  && apt-get -y --no-install-recommends upgrade  && rm -rf /var/lib/apt/lists/*
+#11 0.374 Get:1 http://deb.debian.org/debian bookworm InRelease [151 kB]
+#11 0.425 Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+#11 0.448 Get:3 http://deb.debian.org/debian-security bookworm-security InRelease [34.8 kB]
+#11 0.520 Get:4 http://deb.debian.org/debian bookworm/main amd64 Packages [8790 kB]
+#11 1.537 Get:5 http://deb.debian.org/debian bookworm-updates/main amd64 Packages [6924 B]
+#11 1.538 Get:6 http://deb.debian.org/debian-security bookworm-security/main amd64 Packages [359 kB]
+#11 2.141 Fetched 9398 kB in 2s (5040 kB/s)
+#11 2.141 Reading package lists...
+#11 2.442 Reading package lists...
+#11 2.742 Building dependency tree...
+#11 2.818 Reading state information...
+#11 2.834 Calculating upgrade...
+#11 2.917 The following packages will be upgraded:
+#11 2.917   tzdata
+#11 3.074 1 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#11 3.074 Need to get 308 kB of archives.
+#11 3.074 After this operation, 1024 B of additional disk space will be used.
+#11 3.074 Get:1 http://deb.debian.org/debian-security bookworm-security/main amd64 tzdata all 2026f-0+deb12u1 [308 kB]
+#11 3.239 debconf: delaying package configuration, since apt-utils is not installed
+#11 3.267 Fetched 308 kB in 0s (1379 kB/s)
+#11 3.339 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 6701 files and directories currently installed.)
+#11 3.356 Preparing to unpack .../tzdata_2026f-0+deb12u1_all.deb ...
+#11 3.549 Unpacking tzdata (2026f-0+deb12u1) over (2026e-0+deb12u1) ...
+#11 9.401 Setting up tzdata (2026f-0+deb12u1) ...
+#11 9.476 debconf: unable to initialize frontend: Dialog
+#11 9.476 debconf: (TERM is not set, so the dialog frontend is not usable.)
+#11 9.476 debconf: falling back to frontend: Readline
+#11 9.476 debconf: unable to initialize frontend: Readline
+#11 9.476 debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.36.0 /usr/local/share/perl/5.36.0 /usr/lib/x86_64-linux-gnu/perl5/5.36 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.36 /usr/share/perl/5.36 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+#11 9.476 debconf: falling back to frontend: Teletype
+#11 9.501 
+#11 9.501 Current default time zone: 'Etc/UTC'
+#11 9.503 Local time is now:      Fri Oct 30 16:22:56 UTC 2026.
+#11 9.503 Universal Time is now:  Fri Oct 30 16:22:56 UTC 2026.
+#11 9.503 Run 'dpkg-reconfigure tzdata' if you wish to change it.
+#11 9.503 
+#11 DONE 9.7s
+
+#12 [stage-1 3/6] RUN useradd --system --uid 10001 --no-create-home --shell /usr/sbin/nologin appuser
+#12 0.221 useradd warning: appuser's uid 10001 is greater than SYS_UID_MAX 999
+#12 DONE 0.3s
+
+#13 [stage-1 4/6] COPY --from=build /opt/venv /opt/venv
+#13 DONE 0.5s
+
+#14 [stage-1 5/6] WORKDIR /app
+#14 DONE 0.1s
+
+#15 [stage-1 6/6] COPY app ./app
+#15 DONE 0.1s
+
+#16 exporting to image
+#16 exporting layers
+#16 exporting layers 2.7s done
+#16 exporting manifest sha256:5897326b1f4868ed771c34ae973873c9439fe80df77da7ab45b6e3d98942b08e 0.0s done
+#16 exporting config sha256:076cd54207061b9f5bdf842cba9d2d2828e152b7eda05e98bb81ca1389538b31 0.0s done
+#16 exporting attestation manifest sha256:63932d3cdde123abd3308f32102847c98f8d303f46ef6d317639bdd229cdad6e
+#16 exporting attestation manifest sha256:63932d3cdde123abd3308f32102847c98f8d303f46ef6d317639bdd229cdad6e 0.0s done
+#16 exporting manifest list sha256:fb824bcc7d6cb0a80a1a6317ca6ba0e36ef05d909e63ccf7604d63f8b784e116 0.0s done
+#16 naming to docker.io/library/apex-ops-api:v1.0.0 done
+#16 unpacking to docker.io/library/apex-ops-api:v1.0.0
+#16 unpacking to docker.io/library/apex-ops-api:v1.0.0 0.6s done
+#16 DONE 3.6s
+
+#17 resolving provenance for metadata file
+#17 DONE 0.0s
+ Image apex-ops-api:v1.0.0 Built 
+time="2026-10-30T22:23:01+06:00" level=warning msg="Found orphan containers (apex-ops-api-1) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container apex-ops-db-1 Recreate 
+ Container apex-ops-db-1 Recreated 
+ Container apex-ops-api-blue-1 Recreate 
+ Container apex-ops-api-blue-1 Recreated 
+ Container apex-ops-db-1 Starting 
+ Container apex-ops-db-1 Started 
+ Container apex-ops-db-1 Waiting 
+ Container apex-ops-db-1 Healthy 
+ Container apex-ops-api-blue-1 Starting 
+ Container apex-ops-api-blue-1 Started 
+ Container apex-ops-api-blue-1 Waiting 
+ Container apex-ops-db-1 Waiting 
+ Container apex-ops-db-1 Healthy 
+container apex-ops-api-blue-1 is unhealthy
+!! api-blue did not become ready. Active release left untouched.
+api-blue-1  | INFO:     Waiting for application startup.
+api-blue-1  | {"ts": "2026-10-30T16:23:08+0000", "level": "WARNING", "msg": "startup_db_retry", "version": "v1.0.0", "attempt": 1, "error": "(psycopg2.OperationalError) connection to server at \"db\" (172.18.0.2), port 5432 failed: FATAL:  password authentication failed for user \"apex\"\n\n(Background on this error at: https://sqlalche.me/e/21/"}
+api-blue-1  | {"ts": "2026-10-30T16:23:10+0000", "level": "WARNING", "msg": "startup_db_retry", "version": "v1.0.0", "attempt": 2, "error": "(psycopg2.OperationalError) connection to server at \"db\" (172.18.0.2), port 5432 failed: FATAL:  password authentication failed for user \"apex\"\n\n(Background on this error at: https://sqlalche.me/e/21/"}
+api-blue-1  | {"ts": "2026-10-30T16:23:12+0000", "level": "WARNING", "msg": "startup_db_retry", "version": "v1.0.0", "attempt": 3, "error": "(psycopg2.OperationalError) connection to server at \"db\" (172.18.0.2), port 5432 failed: FATAL:  password authentication failed for user \"apex\"\n\n(Background on this error at: https://sqlalche.me/e/21/"}
+api-blue-1  | {"ts": "2026-10-30T16:23:14+0000", "level": "WARNING", "msg": "startup_db_retry", "version": "v1.0.0", "attempt": 4, "error": "(psycopg2.OperationalError) connection to server at \"db\" (172.18.0.2), port 5432 failed: FATAL:  password authentication failed for user \"apex\"\n\n(Background on this error at: https://sqlalche.me/e/21/"}
+api-blue-1  | {"ts": "2026-10-30T16:23:16+0000", "level": "WARNING", "msg": "startup_db_retry", "version": "v1.0.0", "attempt": 5, "error": "(psycopg2.OperationalError) connection to server at \"db\" (172.18.0.2), port 5432 failed: FATAL:  password authentication failed for user \"apex\"\n\n(Background on this error at: https://sqlalche.me/e/21/"}
+api-blue-1  | {"ts": "2026-10-30T16:23:18+0000", "level": "WARNING", "msg": "startup_db_retry", "version": "v1.0.0", "attempt": 6, "error": "(psycopg2.OperationalError) connection to server at \"db\" (172.18.0.2), port 5432 failed: FATAL:  password authentication failed for user \"apex\"\n\n(Background on this error at: https://sqlalche.me/e/21/"}
+api-blue-1  | {"ts": "2026-10-30T16:23:20+0000", "level": "WARNING", "msg": "startup_db_retry", "version": "v1.0.0", "attempt": 7, "error": "(psycopg2.OperationalError) connection to server at \"db\" (172.18.0.2), port 5432 failed: FATAL:  password authentication failed for user \"apex\"\n\n(Background on this error at: https://sqlalche.me/e/21/"}
+api-blue-1  | {"ts": "2026-10-30T16:23:22+0000", "level": "WARNING", "msg": "startup_db_retry", "version": "v1.0.0", "attempt": 8, "error": "(psycopg2.OperationalError) connection to server at \"db\" (172.18.0.2), port 5432 failed: FATAL:  password authentication failed for user \"apex\"\n\n(Background on this error at: https://sqlalche.me/e/21/"}
+api-blue-1  | {"ts": "2026-10-30T16:23:24+0000", "level": "WARNING", "msg": "startup_db_retry", "version": "v1.0.0", "attempt": 9, "error": "(psycopg2.OperationalError) connection to server at \"db\" (172.18.0.2), port 5432 failed: FATAL:  password authentication failed for user \"apex\"\n\n(Background on this error at: https://sqlalche.me/e/21/"}
+api-blue-1  | {"ts": "2026-10-30T16:23:26+0000", "level": "WARNING", "msg": "startup_db_retry", "version": "v1.0.0", "attempt": 10, "error": "(psycopg2.OperationalError) connection to server at \"db\" (172.18.0.2), port 5432 failed: FATAL:  password authentication failed for user \"apex\"\n\n(Background on this error at: https://sqlalche.me/e/21/"}
+api-blue-1  | {"ts": "2026-10-30T16:23:28+0000", "level": "ERROR", "msg": "startup_db_unavailable", "version": "v1.0.0"}
+api-blue-1  | INFO:     Application startup complete.
+api-blue-1  | INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+api-blue-1  | {"ts": "2026-10-30T16:23:33+0000", "level": "ERROR", "msg": "db_unavailable", "version": "v1.0.0", "error": "(psycopg2.OperationalError) connection to server at \"db\" (172.18.0.2), port 5432 failed: FATAL:  password authentication failed for user \"apex\"\n\n(Background on this error at: https://sqlalche.me/e/21/"}
+api-blue-1  | {"ts": "2026-10-30T16:23:33+0000", "level": "INFO", "msg": "request", "version": "v1.0.0", "request_id": "c24bedbe-b21a-43e5-a04d-15e9509cacd5", "method": "GET", "path": "/readiness", "status": 503, "duration_ms": 7.6}
+api-blue-1  | {"ts": "2026-10-30T16:23:38+0000", "level": "ERROR", "msg": "db_unavailable", "version": "v1.0.0", "error": "(psycopg2.OperationalError) connection to server at \"db\" (172.18.0.2), port 5432 failed: FATAL:  password authentication failed for user \"apex\"\n\n(Background on this error at: https://sqlalche.me/e/21/"}
+api-blue-1  | {"ts": "2026-10-30T16:23:38+0000", "level": "INFO", "msg": "request", "version": "v1.0.0", "request_id": "8abbca50-019d-4ca4-ac68-d97e8e440767", "method": "GET", "path": "/readiness", "status": 503, "duration_ms": 6.89}
+api-blue-1  | {"ts": "2026-10-30T16:23:43+0000", "level": "ERROR", "msg": "db_unavailable", "version": "v1.0.0", "error": "(psycopg2.OperationalError) connection to server at \"db\" (172.18.0.2), port 5432 failed: FATAL:  password authentication failed for user \"apex\"\n\n(Background on this error at: https://sqlalche.me/e/21/"}
+api-blue-1  | {"ts": "2026-10-30T16:23:43+0000", "level": "INFO", "msg": "request", "version": "v1.0.0", "request_id": "f54a5659-ed6c-47a9-866b-c66cf3590b90", "method": "GET", "path": "/readiness", "status": 503, "duration_ms": 6.8}
+ Container apex-ops-api-blue-1 Stopping 
+ Container apex-ops-api-blue-1 Stopped 
+make: *** [Makefile:21: up] Error 1

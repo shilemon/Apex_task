@@ -1,0 +1,4 @@
+Command 'ruff' not found, did you mean:
+  command 'riff' from deb riff (3.6.0-2)
+  command 'duff' from deb duff (0.5.2-2build1)
+Try: sudo apt install <deb name>
