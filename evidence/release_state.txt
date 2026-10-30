@@ -1,0 +1,3 @@
+ACTIVE=green
+BLUE_TAG=v1.0.0
+GREEN_TAG=v1.0.3

@@ -1,0 +1,5 @@
+IMAGE                 ID             DISK USAGE   CONTENT SIZE   EXTRA
+apex-ops-api:v1.0.0   2086d7833bc4        302MB         71.8MB   U    
+apex-ops-api:v1.0.1   ba6079ad755a        302MB         71.8MB        
+apex-ops-api:v1.0.2   40118c6f8f6b        294MB         69.8MB   U    
+apex-ops-api:v1.0.3   c4c207014964        322MB         75.6MB   U    

@@ -1,0 +1,79 @@
+# Blue/green layout: nginx fronts two interchangeable API slots (api-blue / api-green).
+# scripts/deploy.sh starts the new version in the idle slot, waits for /readiness,
+# switches nginx (graceful reload), then stops the old slot. Do not run `up` on both by hand.
+x-api-common: &api-common
+  env_file: .env
+  environment:
+    DATABASE_URL: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+  depends_on:
+    db:
+      condition: service_healthy
+  restart: unless-stopped
+  read_only: true
+  tmpfs: [/tmp]
+  cap_drop: [ALL]
+  security_opt: ["no-new-privileges:true"]
+  healthcheck:
+    test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/readiness', timeout=2).status==200 else 1)"]
+    interval: 5s
+    timeout: 3s
+    retries: 6
+    start_period: 10s
+  networks: [backend]
+
+services:
+  db:
+    image: postgres:16.6-alpine
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks: [backend]
+
+  api-blue:
+    <<: *api-common
+    image: apex-ops-api:${BLUE_TAG:-dev}
+    build:
+      context: .
+      args:
+        APP_VERSION: ${BLUE_TAG:-dev}
+
+  api-green:
+    <<: *api-common
+    profiles: ["green"]
+    image: apex-ops-api:${GREEN_TAG:-dev}
+    build:
+      context: .
+      args:
+        APP_VERSION: ${GREEN_TAG:-dev}
+
+  nginx:
+    image: nginx:1.27.3-alpine
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d:ro
+    networks: [backend]
+
+  # Optional: docker compose --profile monitoring up -d
+  prometheus:
+    profiles: ["monitoring"]
+    image: prom/prometheus:v2.55.1
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/alerts.yml:/etc/prometheus/alerts.yml:ro
+    ports:
+      - "9090:9090"
+    networks: [backend]
+
+volumes:
+  pgdata:
+
+networks:
+  backend:

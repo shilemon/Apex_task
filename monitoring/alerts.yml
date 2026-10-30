@@ -1,0 +1,27 @@
+groups:
+  - name: apex-api
+    rules:
+      - alert: ApexApiDown
+        expr: up{job="apex-api"} == 0
+        for: 1m
+        labels: {severity: critical}
+        annotations:
+          summary: "Apex API is not responding to scrapes"
+      - alert: ApexDatabaseDown
+        expr: apex_db_up == 0
+        for: 1m
+        labels: {severity: critical}
+        annotations:
+          summary: "API cannot reach its database (readiness failing)"
+      - alert: ApexHighErrorRate
+        expr: sum(rate(apex_http_requests_total{status=~"5.."}[5m])) / sum(rate(apex_http_requests_total[5m])) > 0.05
+        for: 5m
+        labels: {severity: warning}
+        annotations:
+          summary: "More than 5% of requests are failing with 5xx"
+      - alert: ApexSlowRequests
+        expr: histogram_quantile(0.95, sum(rate(apex_http_request_seconds_bucket[5m])) by (le)) > 0.5
+        for: 10m
+        labels: {severity: warning}
+        annotations:
+          summary: "p95 latency above 500ms"
