@@ -1,12 +1,4 @@
 #!/usr/bin/env bash
-# Usage: ./scripts/deploy.sh <version-tag>     e.g. ./scripts/deploy.sh v1.0.1
-# Zero-downtime-style blue/green deploy:
-#   1. build image apex-ops-api:<tag> and start it in the IDLE slot
-#   2. wait until the slot's /readiness is healthy (compose --wait)
-#   3. switch nginx to the new slot (graceful reload: in-flight requests finish)
-#   4. stop the old slot (its image stays available for rollback)
-# If anything fails before the switch, the active release is never touched.
-set -euo pipefail
 cd "$(dirname "$0")/.."
 # shellcheck source=scripts/lib.sh
 . scripts/lib.sh

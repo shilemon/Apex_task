@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-# Pin the Dockerfile base image by digest for reproducible builds.
-# Usage: ./scripts/pin_base_image.sh [image]     default: python:3.12-slim-bookworm
-# Re-run it (and rebuild + rescan) whenever you want to take new base-image security fixes.
+
 set -euo pipefail
 cd "$(dirname "$0")/.."
 

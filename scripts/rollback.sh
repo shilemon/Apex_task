@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-# Usage: ./scripts/rollback.sh
-# Switches traffic back to the previous release (the other, stopped slot) without rebuilding.
-# The bad release stays in its stopped slot so it can be inspected.
+
 set -euo pipefail
 cd "$(dirname "$0")/.."
 # shellcheck source=scripts/lib.sh

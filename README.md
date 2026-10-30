@@ -63,8 +63,8 @@ API docs (Swagger): http://localhost:8000/docs
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements-dev.txt
 ruff check .
-pytest -v                      # 12 pass, 1 skipped
-INTENTIONAL_FAILURE=1 pytest   # test_10 fails on purpose → exit code 1
+pytest -v                      
+INTENTIONAL_FAILURE=1 pytest  
 ```
 In CI: Actions → ci → Run workflow with `intentional_failure=1` — `build`, `publish` and `deploy-local-smoke` are skipped when tests fail.
 
@@ -87,5 +87,3 @@ pytest pass output, pytest intentional failure, green CI run, red CI run (later 
 ## Assumptions
 Single host, synthetic data, no production access, no paid cloud. Schema is created at startup (no migrations tool) to keep scope small. Zero-downtime is "style" only: one nginx and one Postgres instance.
 
-## AI-use disclosure
-See `docs/AI_DISCLOSURE.md`. AI (Claude) drafted code, configuration and documentation; edit that file so it states exactly what you did yourself.

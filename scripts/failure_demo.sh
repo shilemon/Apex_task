@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Failure investigation demo: stop the database, observe symptoms, recover.
-# Run AFTER ./scripts/deploy.sh. Saves evidence to ./evidence/failure_demo.log
+
 set -uo pipefail
 cd "$(dirname "$0")/.."
 mkdir -p evidence

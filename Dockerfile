@@ -1,5 +1,4 @@
-# Base image. Pin it by digest once the scan is clean:  ./scripts/pin_base_image.sh
-# (it rewrites the line below to python:3.12-slim-bookworm@sha256:<digest>)
+
 ARG PYTHON_IMAGE=python:3.12-slim-bookworm
 
 # ---- build stage: install deps into a venv ----
@@ -18,7 +17,6 @@ ENV APP_VERSION=${APP_VERSION} \
     PATH="/opt/venv/bin:$PATH" \
     PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
-# Apply Debian security fixes published after the base image was built (fixes Trivy OS findings).
 RUN apt-get update \
  && apt-get -y --no-install-recommends upgrade \
  && rm -rf /var/lib/apt/lists/*
