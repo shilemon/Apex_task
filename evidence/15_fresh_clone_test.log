@@ -1,0 +1,102 @@
+==> Deploying v1.0.0 into slot 'blue' (active slot: none)
+ Image apex-ops-api:v1.0.0 Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 553B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile:
+#2 transferring dockerfile: 1.11kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim-bookworm
+#3 DONE 1.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 122B done
+#4 DONE 0.0s
+
+#5 [build 1/5] FROM docker.io/library/python:3.12-slim-bookworm@sha256:e697c81897302a4c4333bade000d98038fbb21eb064f8ee1fd42d02ebcd9d337
+#5 resolve docker.io/library/python:3.12-slim-bookworm@sha256:e697c81897302a4c4333bade000d98038fbb21eb064f8ee1fd42d02ebcd9d337 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 7.92kB done
+#6 DONE 0.0s
+
+#7 [stage-1 2/6] RUN apt-get update  && apt-get -y --no-install-recommends upgrade  && rm -rf /var/lib/apt/lists/*
+#7 CACHED
+
+#8 [build 2/5] WORKDIR /build
+#8 CACHED
+
+#9 [stage-1 5/6] WORKDIR /app
+#9 CACHED
+
+#10 [build 3/5] RUN python -m venv /opt/venv
+#10 CACHED
+
+#11 [build 4/5] COPY requirements.txt .
+#11 CACHED
+
+#12 [stage-1 3/6] RUN useradd --system --uid 10001 --no-create-home --shell /usr/sbin/nologin appuser
+#12 CACHED
+
+#13 [build 5/5] RUN pip install -r requirements.txt
+#13 CACHED
+
+#14 [stage-1 4/6] COPY --from=build /opt/venv /opt/venv
+#14 CACHED
+
+#15 [stage-1 6/6] COPY app ./app
+#15 CACHED
+
+#16 exporting to image
+#16 exporting layers
+#16 exporting layers done
+#16 exporting manifest sha256:12f7201c72aadd977ecaf76bed272ff46eb26d4eea349f5280b3adf46d402a1f 0.0s done
+#16 exporting config sha256:41332a1b9cbcff26949d46da868078cae9ac77c8a5b27aadafbc18960c7459ab 0.0s done
+#16 exporting attestation manifest sha256:77735e4244f0539c63953cfb738eb6f2bd14393a5ccf854288ca8f55edcf4fdf 0.0s done
+#16 exporting manifest list sha256:de41257b2f3d88b118a0721ada11c7751877970349e70fb3335afa53569b4ac8
+#16 exporting manifest list sha256:de41257b2f3d88b118a0721ada11c7751877970349e70fb3335afa53569b4ac8 0.0s done
+#16 naming to docker.io/library/apex-ops-api:v1.0.0 done
+#16 unpacking to docker.io/library/apex-ops-api:v1.0.0
+#16 unpacking to docker.io/library/apex-ops-api:v1.0.0 0.5s done
+#16 DONE 0.7s
+
+#17 resolving provenance for metadata file
+#17 DONE 0.0s
+ Image apex-ops-api:v1.0.0 Built 
+ Network fresh-test_backend Creating 
+ Volume fresh-test_pgdata Creating 
+ Volume fresh-test_pgdata Creating 
+ Network fresh-test_backend Creating 
+ Volume fresh-test_pgdata Created 
+ Volume fresh-test_pgdata Created 
+ Network fresh-test_backend Created 
+ Network fresh-test_backend Created 
+ Container fresh-test-db-1 Creating 
+ Container fresh-test-db-1 Created 
+ Container fresh-test-api-blue-1 Creating 
+ Container fresh-test-api-blue-1 Created 
+ Container fresh-test-db-1 Starting 
+ Container fresh-test-db-1 Started 
+ Container fresh-test-db-1 Waiting 
+ Container fresh-test-db-1 Healthy 
+ Container fresh-test-api-blue-1 Starting 
+ Container fresh-test-api-blue-1 Started 
+ Container fresh-test-db-1 Waiting 
+ Container fresh-test-api-blue-1 Waiting 
+ Container fresh-test-db-1 Healthy 
+ Container fresh-test-api-blue-1 Healthy 
+ Container fresh-test-nginx-1 Creating 
+ Container fresh-test-nginx-1 Created 
+ Container fresh-test-nginx-1 Starting 
+ Container fresh-test-nginx-1 Started 
+ Container fresh-test-nginx-1 Waiting 
+ Container fresh-test-nginx-1 Healthy 
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+2026/10/31 07:51:46 [notice] 43#43: signal process started
+==> OK: v1.0.0 is live in slot 'blue'
+{"status":"ok","version":"v1.0.0"}
