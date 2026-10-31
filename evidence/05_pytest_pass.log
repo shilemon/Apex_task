@@ -1,2 +1,24 @@
-Command 'pytest' not found, but can be installed with:
-sudo apt install python3-pytest
+============================= test session starts ==============================
+platform linux -- Python 3.12.16, pytest-8.3.4, pluggy-1.7.0 -- /home/emon/Downloads/apex-ops/apex-ops/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/emon/Downloads/apex-ops/apex-ops
+configfile: pytest.ini
+testpaths: tests
+plugins: anyio-4.15.1
+collecting ... collected 13 items
+
+tests/test_api.py::test_01_health_is_ok PASSED                           [  7%]
+tests/test_api.py::test_02_ready_reports_database_up PASSED              [ 15%]
+tests/test_api.py::test_03_create_incident PASSED                        [ 23%]
+tests/test_api.py::test_04_list_incidents PASSED                         [ 30%]
+tests/test_api.py::test_05_unknown_incident_returns_404 PASSED           [ 38%]
+tests/test_api.py::test_06_invalid_severity_rejected PASSED              [ 46%]
+tests/test_api.py::test_07_resolve_incident PASSED                       [ 53%]
+tests/test_api.py::test_08_metrics_exposed PASSED                        [ 61%]
+tests/test_api.py::test_09_request_id_header_returned PASSED             [ 69%]
+tests/test_api.py::test_11_update_incident PASSED                        [ 76%]
+tests/test_api.py::test_12_delete_incident PASSED                        [ 84%]
+tests/test_api.py::test_13_readiness_returns_503_when_database_down PASSED [ 92%]
+tests/test_api.py::test_10_intentional_failure_demo SKIPPED (Demo ga...) [100%]
+
+======================== 12 passed, 1 skipped in 1.03s =========================

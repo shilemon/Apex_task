@@ -1,27 +1,6 @@
-{"status":"ok","version":"v1.0.3"}
 {"status":"ready","database":"up"}
-{"id":3,"title":"Disk 90% on node-1","severity":"high","status":"open"}
-[{"id":2,"title":"Persistence test","severity":"low","status":"open"},{"id":3,"title":"Disk 90% on node-1","severity":"high","status":"open"}]
+{"id":1,"title":"Persistence test","severity":"low","status":"open"}
+[{"id":1,"title":"Persistence test","severity":"low","status":"open"}]
  Container apex-ops-db-1 Restarting 
  Container apex-ops-db-1 Started 
-[{"id":2,"title":"Persistence test","severity":"low","status":"open"},{"id":3,"title":"Disk 90% on node-1","severity":"high","status":"open"}]
-# HELP python_gc_objects_collected_total Objects collected during gc
-# TYPE python_gc_objects_collected_total counter
-python_gc_objects_collected_total{generation="0"} 424.0
-python_gc_objects_collected_total{generation="1"} 61.0
-python_gc_objects_collected_total{generation="2"} 0.0
-# HELP python_gc_objects_uncollectable_total Uncollectable objects found during GC
-# TYPE python_gc_objects_uncollectable_total counter
-python_gc_objects_uncollectable_total{generation="0"} 0.0
-python_gc_objects_uncollectable_total{generation="1"} 0.0
-python_gc_objects_uncollectable_total{generation="2"} 0.0
-# HELP python_gc_collections_total Number of times this generation was collected
-# TYPE python_gc_collections_total counter
-python_gc_collections_total{generation="0"} 194.0
-python_gc_collections_total{generation="1"} 17.0
-python_gc_collections_total{generation="2"} 1.0
-# HELP python_info Python platform information
-# TYPE python_info gauge
-python_info{implementation="CPython",major="3",minor="12",patchlevel="16",version="3.12.16"} 1.0
-# HELP process_virtual_memory_bytes Virtual memory size in bytes.
-# TYPE process_virtual_memory_bytes gauge
+[{"id":1,"title":"Persistence test","severity":"low","status":"open"}]

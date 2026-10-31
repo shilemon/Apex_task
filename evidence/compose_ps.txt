@@ -1,4 +1,4 @@
-NAME                   IMAGE                  COMMAND                  SERVICE     CREATED          STATUS                   PORTS
-apex-ops-api-green-1   apex-ops-api:v1.0.3    "uvicorn app.main:ap…"   api-green   4 minutes ago    Up 4 minutes (healthy)   8000/tcp
-apex-ops-db-1          postgres:16.6-alpine   "docker-entrypoint.s…"   db          4 minutes ago    Up 4 minutes (healthy)   5432/tcp
-apex-ops-nginx-1       nginx:1.27.3-alpine    "/docker-entrypoint.…"   nginx       27 minutes ago   Up 27 minutes            0.0.0.0:8000->80/tcp, [::]:8000->80/tcp
+NAME                  IMAGE                  COMMAND                  SERVICE    CREATED         STATUS                    PORTS
+apex-ops-api-blue-1   apex-ops-api:v1.0.0    "uvicorn app.main:ap…"   api-blue   5 minutes ago   Up 15 seconds (healthy)   8000/tcp
+apex-ops-db-1         postgres:16.6-alpine   "docker-entrypoint.s…"   db         5 minutes ago   Up 4 minutes (healthy)    5432/tcp
+apex-ops-nginx-1      nginx:1.27.3-alpine    "/docker-entrypoint.…"   nginx      5 minutes ago   Up 5 minutes              0.0.0.0:8000->80/tcp, [::]:8000->80/tcp

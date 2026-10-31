@@ -1,0 +1,123 @@
+==> Deploying v1.0.1 into slot 'green' (active slot: blue)
+ Image apex-ops-api:v1.0.1 Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 600B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.11kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim-bookworm
+#3 DONE 1.1s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 122B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 358B done
+#5 DONE 0.0s
+
+#6 [build 1/5] FROM docker.io/library/python:3.12-slim-bookworm@sha256:e697c81897302a4c4333bade000d98038fbb21eb064f8ee1fd42d02ebcd9d337
+#6 resolve docker.io/library/python:3.12-slim-bookworm@sha256:e697c81897302a4c4333bade000d98038fbb21eb064f8ee1fd42d02ebcd9d337 0.0s done
+#6 CACHED
+
+#7 [build 2/5] WORKDIR /build
+#7 CACHED
+
+#8 [build 3/5] RUN python -m venv /opt/venv
+#8 CACHED
+
+#9 [build 4/5] COPY requirements.txt .
+#9 CACHED
+
+#10 [build 5/5] RUN pip install -r requirements.txt
+#10 CACHED
+
+#11 [stage-1 2/6] RUN apt-get update  && apt-get -y --no-install-recommends upgrade  && rm -rf /var/lib/apt/lists/*
+#11 0.356 Get:1 http://deb.debian.org/debian bookworm InRelease [151 kB]
+#11 0.605 Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+#11 0.635 Get:3 http://deb.debian.org/debian-security bookworm-security InRelease [34.8 kB]
+#11 0.655 Get:4 http://deb.debian.org/debian bookworm/main amd64 Packages [8790 kB]
+#11 1.521 Get:5 http://deb.debian.org/debian bookworm-updates/main amd64 Packages [6924 B]
+#11 1.578 Get:6 http://deb.debian.org/debian-security bookworm-security/main amd64 Packages [359 kB]
+#11 2.112 Fetched 9398 kB in 2s (5006 kB/s)
+#11 2.112 Reading package lists...
+#11 2.429 Reading package lists...
+#11 2.742 Building dependency tree...
+#11 2.810 Reading state information...
+#11 2.825 Calculating upgrade...
+#11 2.905 The following packages will be upgraded:
+#11 2.905   tzdata
+#11 2.963 1 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#11 2.963 Need to get 308 kB of archives.
+#11 2.963 After this operation, 1024 B of additional disk space will be used.
+#11 2.963 Get:1 http://deb.debian.org/debian-security bookworm-security/main amd64 tzdata all 2026f-0+deb12u1 [308 kB]
+#11 3.137 debconf: delaying package configuration, since apt-utils is not installed
+#11 3.170 Fetched 308 kB in 0s (2300 kB/s)
+#11 3.249 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 6701 files and directories currently installed.)
+#11 3.269 Preparing to unpack .../tzdata_2026f-0+deb12u1_all.deb ...
+#11 3.457 Unpacking tzdata (2026f-0+deb12u1) over (2026e-0+deb12u1) ...
+#11 9.220 Setting up tzdata (2026f-0+deb12u1) ...
+#11 9.297 debconf: unable to initialize frontend: Dialog
+#11 9.297 debconf: (TERM is not set, so the dialog frontend is not usable.)
+#11 9.297 debconf: falling back to frontend: Readline
+#11 9.298 debconf: unable to initialize frontend: Readline
+#11 9.298 debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.36.0 /usr/local/share/perl/5.36.0 /usr/lib/x86_64-linux-gnu/perl5/5.36 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.36 /usr/share/perl/5.36 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+#11 9.298 debconf: falling back to frontend: Teletype
+#11 9.331 
+#11 9.331 Current default time zone: 'Etc/UTC'
+#11 9.333 Local time is now:      Sat Oct 31 07:44:25 UTC 2026.
+#11 9.333 Universal Time is now:  Sat Oct 31 07:44:25 UTC 2026.
+#11 9.333 Run 'dpkg-reconfigure tzdata' if you wish to change it.
+#11 9.333 
+#11 DONE 9.5s
+
+#12 [stage-1 3/6] RUN useradd --system --uid 10001 --no-create-home --shell /usr/sbin/nologin appuser
+#12 0.213 useradd warning: appuser's uid 10001 is greater than SYS_UID_MAX 999
+#12 DONE 0.3s
+
+#13 [stage-1 4/6] COPY --from=build /opt/venv /opt/venv
+#13 DONE 0.5s
+
+#14 [stage-1 5/6] WORKDIR /app
+#14 DONE 0.1s
+
+#15 [stage-1 6/6] COPY app ./app
+#15 DONE 0.1s
+
+#16 exporting to image
+#16 exporting layers
+#16 exporting layers 2.9s done
+#16 exporting manifest sha256:fc2fc83c02130477e24d85049546ddc9f4ef450592b3854dd5b1cfaeab647b9f 0.0s done
+#16 exporting config sha256:d0f1221eefd1bf0dbe6370e2396befef17122afc3c6abff15cd15dc1c19fca5a 0.0s done
+#16 exporting attestation manifest sha256:df559793a52e2892d20b9acb944563fb61ccd8ba2f8a1293d6050713c72d3da0 0.0s done
+#16 exporting manifest list sha256:b02e9e4352a5ccdc15ad2199bf6d26ca4cd27a692e2e9aac17270abd9206013c
+#16 exporting manifest list sha256:b02e9e4352a5ccdc15ad2199bf6d26ca4cd27a692e2e9aac17270abd9206013c 0.0s done
+#16 naming to docker.io/library/apex-ops-api:v1.0.1 done
+#16 unpacking to docker.io/library/apex-ops-api:v1.0.1
+#16 unpacking to docker.io/library/apex-ops-api:v1.0.1 0.7s done
+#16 DONE 3.8s
+
+#17 resolving provenance for metadata file
+#17 DONE 0.0s
+ Image apex-ops-api:v1.0.1 Built 
+ Container apex-ops-db-1 Running 
+ Container apex-ops-api-green-1 Creating 
+ Container apex-ops-api-green-1 Created 
+ Container apex-ops-db-1 Waiting 
+ Container apex-ops-db-1 Healthy 
+ Container apex-ops-api-green-1 Starting 
+ Container apex-ops-api-green-1 Started 
+ Container apex-ops-db-1 Waiting 
+ Container apex-ops-api-green-1 Waiting 
+ Container apex-ops-db-1 Healthy 
+ Container apex-ops-api-green-1 Healthy 
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+2026/10/31 07:44:37 [notice] 71#71: signal process started
+ Container apex-ops-api-blue-1 Stopping 
+ Container apex-ops-api-blue-1 Stopped 
+==> OK: v1.0.1 is live in slot 'green'
+{"status":"ok","version":"v1.0.1"}

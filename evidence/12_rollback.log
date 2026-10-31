@@ -1,8 +1,5 @@
 ==> Rolling back: slot green -> slot blue (version v1.0.0)
-time="2026-10-30T23:22:32+06:00" level=warning msg="Found orphan containers (apex-ops-api-1) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
  Container apex-ops-db-1 Running 
- Container apex-ops-api-blue-1 Recreate 
- Container apex-ops-api-blue-1 Recreated 
  Container apex-ops-db-1 Waiting 
  Container apex-ops-db-1 Healthy 
  Container apex-ops-api-blue-1 Starting 
@@ -10,4 +7,11 @@ time="2026-10-30T23:22:32+06:00" level=warning msg="Found orphan containers (ape
  Container apex-ops-db-1 Waiting 
  Container apex-ops-api-blue-1 Waiting 
  Container apex-ops-db-1 Healthy 
-container apex-ops-api-blue-1 is unhealthy
+ Container apex-ops-api-blue-1 Healthy 
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+2026/10/31 07:48:04 [notice] 156#156: signal process started
+ Container apex-ops-api-green-1 Stopping 
+ Container apex-ops-api-green-1 Stopped 
+==> Rollback complete. Live version:
+{"status":"ok","version":"v1.0.0"}

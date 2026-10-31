@@ -1,2 +1,46 @@
-Command 'pytest' not found, but can be installed with:
-sudo apt install python3-pytest
+============================= test session starts ==============================
+platform linux -- Python 3.12.16, pytest-8.3.4, pluggy-1.7.0 -- /home/emon/Downloads/apex-ops/apex-ops/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/emon/Downloads/apex-ops/apex-ops
+configfile: pytest.ini
+testpaths: tests
+plugins: anyio-4.15.1
+collecting ... collected 13 items
+
+tests/test_api.py::test_01_health_is_ok PASSED                           [  7%]
+tests/test_api.py::test_02_ready_reports_database_up PASSED              [ 15%]
+tests/test_api.py::test_03_create_incident PASSED                        [ 23%]
+tests/test_api.py::test_04_list_incidents PASSED                         [ 30%]
+tests/test_api.py::test_05_unknown_incident_returns_404 PASSED           [ 38%]
+tests/test_api.py::test_06_invalid_severity_rejected PASSED              [ 46%]
+tests/test_api.py::test_07_resolve_incident PASSED                       [ 53%]
+tests/test_api.py::test_08_metrics_exposed PASSED                        [ 61%]
+tests/test_api.py::test_09_request_id_header_returned PASSED             [ 69%]
+tests/test_api.py::test_11_update_incident PASSED                        [ 76%]
+tests/test_api.py::test_12_delete_incident PASSED                        [ 84%]
+tests/test_api.py::test_13_readiness_returns_503_when_database_down PASSED [ 92%]
+tests/test_api.py::test_10_intentional_failure_demo FAILED               [100%]
+
+=================================== FAILURES ===================================
+_______________________ test_10_intentional_failure_demo _______________________
+
+client = <starlette.testclient.TestClient object at 0x7016a5c5f560>
+
+    @pytest.mark.skipif(
+        os.getenv("INTENTIONAL_FAILURE") != "1",
+        reason="Demo gate: set INTENTIONAL_FAILURE=1 to prove CI blocks deployment",
+    )
+    def test_10_intentional_failure_demo(client):
+        """Fails on purpose when INTENTIONAL_FAILURE=1 (used to show the CI gate)."""
+>       assert client.get("/health").json()["status"] == "broken-on-purpose"
+E       AssertionError: assert 'ok' == 'broken-on-purpose'
+E         
+E         - broken-on-purpose
+E         + ok
+
+tests/test_api.py:97: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+{"ts": "2026-10-31T13:42:43+0600", "level": "INFO", "msg": "startup_ok", "version": "dev", "attempt": 1}
+=========================== short test summary info ============================
+FAILED tests/test_api.py::test_10_intentional_failure_demo - AssertionError: ...
+========================= 1 failed, 12 passed in 1.09s =========================
