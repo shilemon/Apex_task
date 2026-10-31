@@ -1,13 +1,21 @@
 # AI-use disclosure
 
-AI assistance (Claude) was used for the following. **Edit this file to match exactly what you did and what you changed yourself before submitting.**
+I used an AI assistant (Claude by Anthropic) in a chat session during this assessment. Specific uses are listed below.
 
-| Area | AI use | My own work / verification |
-|---|---|---|
-| Application code | Generated first draft of FastAPI app and tests | I read every file, ran the tests, and can explain each endpoint |
-| Dockerfile / Compose | Drafted multi-stage non-root Dockerfile and Compose file | I ran them locally and checked `docker compose ps` and user ID |
-| CI workflow | Drafted GitHub Actions jobs | I ran it on my repo and captured the green and red runs |
-| Scripts | Drafted deploy/rollback/failure-demo scripts | I executed them and saved the output in `evidence/` |
-| Documentation | Drafted README, runbook, memo | I reviewed and adjusted them to what I actually ran |
+## What the AI did
+- Drafted the first version of the FastAPI app, the pytest suite, the multi-stage non-root Dockerfile, docker-compose.yml, the nginx blue/green configuration and the deploy, rollback and failure-demo scripts.
+- Drafted the GitHub Actions workflow and the first version of the documentation (README, runbook, release, monitoring, security, AWS path, decision memo).
+- Suggested fixes when I pasted errors (Python virtual environment, Docker and Trivy usage, Git authentication).
 
-Not done by AI: running the deployment, capturing evidence, and the live review.
+## What I did myself
+- Ran the project on my own machine (Ubuntu with Docker): tests, deployments, rollback, the database failure demo and the Trivy scans.
+- Found and reported problems by running it: the stale release state after `make down`, the Trivy findings (54 OS and 3 Python, fixed and rescanned clean), the non-existent Trivy action tag in CI, and the password mismatch caused by changing POSTGRES_PASSWORD after the database volume existed.
+- Created the GitHub repository and SSH key, pushed the code, ran the workflow (green run and intentional-failure red run) and tagged v1.0.4.
+- Captured the evidence in the evidence folder and reviewed the code so I can explain it in the live review.
+
+## What the AI got wrong (found by running it)
+- The first deploy.sh trusted stale saved state and failed on the first run.
+- The first image used an outdated base image and dependency versions with known vulnerabilities.
+- The first CI workflow used a Trivy action version that does not exist and a pytest step that could hide a failure.
+
+Nothing in this repository is claimed to have been run unless matching evidence exists in the evidence folder.

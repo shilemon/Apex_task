@@ -76,7 +76,7 @@ In CI: Actions → ci → Run workflow with `intentional_failure=1` — `build`,
 Versioning rules, tagging and the zero-downtime explanation: `docs/RELEASE.md`.
 
 ## Observability and failure investigation
-`docs/MONITORING.md` (metrics, alerts, Grafana panel proposal). `make demo-failure` stops the database and saves the investigation to `evidence/failure_demo.log`. `docs/FAILURE_INVESTIGATION.md` is a **simulated** example only — replace with your real log.
+`docs/MONITORING.md` (metrics, alerts, Grafana panel proposal). `make demo-failure` stops the database and saves the investigation to `evidence/failure_demo.log`. The real investigation is written up in `docs/FAILURE_INVESTIGATION.md`.
 
 ## Security and cloud
 `docs/SECURITY.md` (secrets, least privilege, pip-audit + Trivy), `docs/AWS_PATH.md` (ECS Fargate architecture and costs).

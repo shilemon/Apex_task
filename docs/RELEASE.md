@@ -10,7 +10,7 @@
 Release steps:
 1. Merge to `main` only when CI is green.
 2. Tag: `git tag -a v1.1.0 -m "Add PUT/DELETE incidents" && git push origin v1.1.0`.
-3. CI publishes `ghcr.io/<owner>/<repo>:1.1.0`, `:1.1` and `:<full-sha>`. There is no `latest` tag on purpose: every running image is traceable to one commit.
+3. CI publishes `ghcr.io/shilemon/apex_task:1.1.0`, `:1.1` and `:sha-<full-sha>`. There is no `latest` tag on purpose: every running image is traceable to one commit.
 4. Deploy locally with `./scripts/deploy.sh v1.1.0` (the same tag name the container reports at `/health`).
 
 ## Zero-downtime-style deployment (blue/green behind nginx)
